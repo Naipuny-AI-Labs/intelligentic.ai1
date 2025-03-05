@@ -1,9 +1,13 @@
 /**
- * Color intention that you want to used in your theme
+ * Generates a theme palette dynamically based on theme customization.
  * @param {JsonObject} theme Theme customization object
  */
-
 export default function themePalette(theme) {
+    const isDark = theme?.customization?.isDarkMode;
+    
+    // Utility function to dynamically select color based on mode
+    const getColor = (lightKey, darkKey) => isDark ? theme.colors?.[darkKey] : theme.colors?.[lightKey];
+
     return {
         mode: theme?.customization?.navType,
         transparent: theme.colors?.transparent,
@@ -12,45 +16,24 @@ export default function themePalette(theme) {
             dark: theme.colors?.darkPrimaryMain
         },
         primary: {
-            light: theme.customization.isDarkMode ? theme.colors?.darkPrimaryLight : theme.colors?.primaryLight,
+            light: getColor('primaryLight', 'darkPrimaryLight'),
             main: theme.colors?.primaryMain,
-            dark: theme.customization.isDarkMode ? theme.colors?.darkPrimaryDark : theme.colors?.primaryDark,
-            200: theme.customization.isDarkMode ? theme.colors?.darkPrimary200 : theme.colors?.primary200,
-            800: theme.customization.isDarkMode ? theme.colors?.darkPrimary800 : theme.colors?.primary800
+            dark: getColor('primaryDark', 'darkPrimaryDark'),
+            200: getColor('primary200', 'darkPrimary200'),
+            800: getColor('primary800', 'darkPrimary800')
         },
         secondary: {
-            light: theme.customization.isDarkMode ? theme.colors?.darkSecondaryLight : theme.colors?.secondaryLight,
-            main: theme.customization.isDarkMode ? theme.colors?.darkSecondaryMain : theme.colors?.secondaryMain,
-            dark: theme.customization.isDarkMode ? theme.colors?.darkSecondaryDark : theme.colors?.secondaryDark,
+            light: getColor('secondaryLight', 'darkSecondaryLight'),
+            main: getColor('secondaryMain', 'darkSecondaryMain'),
+            dark: getColor('secondaryDark', 'darkSecondaryDark'),
             200: theme.colors?.secondary200,
             800: theme.colors?.secondary800
         },
-        error: {
-            light: theme.colors?.errorLight,
-            main: theme.colors?.errorMain,
-            dark: theme.colors?.errorDark
-        },
-        orange: {
-            light: theme.colors?.orangeLight,
-            main: theme.colors?.orangeMain,
-            dark: theme.colors?.orangeDark
-        },
-        teal: {
-            light: theme.colors?.tealLight,
-            main: theme.colors?.tealMain,
-            dark: theme.colors?.tealDark
-        },
-        warning: {
-            light: theme.colors?.warningLight,
-            main: theme.colors?.warningMain,
-            dark: theme.colors?.warningDark
-        },
-        success: {
-            light: theme.colors?.successLight,
-            200: theme.colors?.success200,
-            main: theme.colors?.successMain,
-            dark: theme.colors?.successDark
-        },
+        error: createColorObject('error'),
+        warning: createColorObject('warning'),
+        success: createColorObject('success', true),
+        orange: createColorObject('orange'),
+        teal: createColorObject('teal'),
         grey: {
             50: theme.colors?.grey50,
             100: theme.colors?.grey100,
@@ -79,15 +62,15 @@ export default function themePalette(theme) {
             default: theme.backgroundDefault
         },
         card: {
-            main: theme.customization.isDarkMode ? theme.colors?.darkPrimaryMain : theme.colors?.paper,
-            light: theme.customization.isDarkMode ? theme.colors?.darkPrimary200 : theme.colors?.paper,
-            hover: theme.customization.isDarkMode ? theme.colors?.darkPrimary800 : theme.colors?.paper
+            main: getColor('paper', 'darkPrimaryMain'),
+            light: getColor('paper', 'darkPrimary200'),
+            hover: getColor('paper', 'darkPrimary800')
         },
         asyncSelect: {
-            main: theme.customization.isDarkMode ? theme.colors?.darkPrimary800 : theme.colors?.grey50
+            main: getColor('grey50', 'darkPrimary800')
         },
         timeMessage: {
-            main: theme.customization.isDarkMode ? theme.colors?.darkLevel2 : theme.colors?.grey200
+            main: getColor('grey200', 'darkLevel2')
         },
         canvasHeader: {
             deployLight: theme.colors?.primaryLight,
@@ -98,11 +81,21 @@ export default function themePalette(theme) {
             settingsDark: theme.colors?.grey700
         },
         codeEditor: {
-            main: theme.customization.isDarkMode ? theme.colors?.darkPrimary800 : theme.colors?.primaryLight
+            main: getColor('primaryLight', 'darkPrimary800')
         },
         nodeToolTip: {
-            background: theme.customization.isDarkMode ? theme.colors?.darkPrimary800 : theme.colors?.paper,
-            color: theme.customization.isDarkMode ? theme.colors?.paper : 'rgba(0, 0, 0, 0.87)'
+            background: getColor('paper', 'darkPrimary800'),
+            color: isDark ? theme.colors?.paper : 'rgba(0, 0, 0, 0.87)'
         }
+    };
+
+    // Helper function to dynamically create color objects
+    function createColorObject(color, include200 = false) {
+        return {
+            light: theme.colors?.[`${color}Light`],
+            main: theme.colors?.[`${color}Main`],
+            dark: theme.colors?.[`${color}Dark`],
+            ...(include200 && { 200: theme.colors?.[`${color}200`] }) // Optional 200 value
+        };
     }
 }

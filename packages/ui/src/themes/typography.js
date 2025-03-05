@@ -1,69 +1,29 @@
 /**
- * Typography used in theme
- * @param {JsonObject} theme theme customization object
+ * Typography used in theme with modern font choices
+ * @param {JsonObject} theme Theme customization object
  */
 
 export default function themeTypography(theme) {
+    const isDark = theme?.customization?.isDarkMode;
+
     return {
-        fontFamily: theme?.customization?.fontFamily,
-        h6: {
-            fontWeight: 500,
-            color: theme.heading,
-            fontSize: '0.75rem'
-        },
-        h5: {
-            fontSize: '0.875rem',
-            color: theme.heading,
-            fontWeight: 500
-        },
-        h4: {
-            fontSize: '1rem',
-            color: theme.heading,
-            fontWeight: 600
-        },
-        h3: {
-            fontSize: '1.25rem',
-            color: theme.heading,
-            fontWeight: 600
-        },
-        h2: {
-            fontSize: '1.5rem',
-            color: theme.heading,
-            fontWeight: 700
-        },
-        h1: {
-            fontSize: '2.125rem',
-            color: theme.heading,
-            fontWeight: 700
-        },
-        subtitle1: {
-            fontSize: '0.875rem',
-            fontWeight: 500,
-            color: theme.textDark
-        },
-        subtitle2: {
-            fontSize: '0.75rem',
-            fontWeight: 400,
-            color: theme.darkTextSecondary
-        },
-        caption: {
-            fontSize: '0.75rem',
-            color: theme.darkTextSecondary,
-            fontWeight: 400
-        },
-        body1: {
-            fontSize: '0.875rem',
-            fontWeight: 400,
-            lineHeight: '1.334em'
-        },
-        body2: {
-            letterSpacing: '0em',
-            fontWeight: 400,
-            lineHeight: '1.5em',
-            color: theme.darkTextPrimary
-        },
+        fontFamily: theme?.customization?.fontFamily || '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+        h6: createTypography('0.75rem', 500, theme.heading),
+        h5: createTypography('0.875rem', 500, theme.heading),
+        h4: createTypography('1rem', 600, theme.heading),
+        h3: createTypography('1.25rem', 600, theme.heading),
+        h2: createTypography('1.5rem', 700, theme.heading),
+        h1: createTypography('2.125rem', 700, theme.heading),
+        subtitle1: createTypography('0.875rem', 500, theme.textDark, 1.5),
+        subtitle2: createTypography('0.75rem', 400, theme.darkTextSecondary, 1.4),
+        caption: createTypography('0.75rem', 400, theme.darkTextSecondary, 1.3),
+        body1: createTypography('0.875rem', 400, theme.darkTextPrimary, 1.5),
+        body2: createTypography('0.875rem', 400, theme.darkTextPrimary, 1.6, '0em'),
         button: {
-            textTransform: 'capitalize'
+            textTransform: 'capitalize',
+            fontWeight: 600,
+            fontSize: '0.875rem',
+            letterSpacing: '0.5px'
         },
         customInput: {
             marginTop: 1,
@@ -72,62 +32,48 @@ export default function themeTypography(theme) {
                 top: 23,
                 left: 0,
                 color: theme.grey500,
-                '&[data-shrink="false"]': {
-                    top: 5
-                }
+                fontSize: '0.85rem',
+                '&[data-shrink="false"]': { top: 5 }
             },
             '& > div > input': {
-                padding: '30.5px 14px 11.5px !important'
+                padding: '28px 14px 10px !important',
+                fontSize: '0.9rem'
             },
-            '& legend': {
-                display: 'none'
-            },
-            '& fieldset': {
-                top: 0
-            }
+            '& legend': { display: 'none' },
+            '& fieldset': { top: 0 }
         },
         mainContent: {
-            backgroundColor: theme.background,
+            backgroundColor: isDark ? theme.darkPaper : theme.background,
             width: '100%',
             minHeight: 'calc(100vh - 75px)',
             flexGrow: 1,
-            padding: '20px',
+            padding: '24px',
             marginTop: '75px',
             marginRight: '20px',
             borderRadius: `${theme?.customization?.borderRadius}px`
         },
-        menuCaption: {
-            fontSize: '0.875rem',
-            fontWeight: 500,
-            color: theme.heading,
-            padding: '6px',
-            textTransform: 'capitalize',
-            marginTop: '10px'
-        },
-        subMenuCaption: {
-            fontSize: '0.6875rem',
-            fontWeight: 500,
-            color: theme.darkTextSecondary,
-            textTransform: 'capitalize'
-        },
+        menuCaption: createTypography('0.875rem', 500, theme.heading, 1.4, '0.5px'),
+        subMenuCaption: createTypography('0.6875rem', 500, theme.darkTextSecondary, 1.3),
         commonAvatar: {
             cursor: 'pointer',
-            borderRadius: '8px'
+            borderRadius: '8px',
+            transition: 'all 0.3s ease-in-out',
+            '&:hover': {
+                boxShadow: isDark ? '0px 4px 12px rgba(255, 255, 255, 0.1)' : '0px 4px 12px rgba(0, 0, 0, 0.1)'
+            }
         },
-        smallAvatar: {
-            width: '22px',
-            height: '22px',
-            fontSize: '1rem'
-        },
-        mediumAvatar: {
-            width: '34px',
-            height: '34px',
-            fontSize: '1.2rem'
-        },
-        largeAvatar: {
-            width: '44px',
-            height: '44px',
-            fontSize: '1.5rem'
-        }
+        smallAvatar: avatarSize('22px', '1rem'),
+        mediumAvatar: avatarSize('34px', '1.2rem'),
+        largeAvatar: avatarSize('44px', '1.5rem')
+    };
+
+    // Utility function to define typography properties
+    function createTypography(size, weight, color, lineHeight = 1.3, letterSpacing = '0em') {
+        return { fontSize: size, fontWeight: weight, color, lineHeight: `${lineHeight}em`, letterSpacing };
+    }
+
+    // Utility function for avatar sizes
+    function avatarSize(size, fontSize) {
+        return { width: size, height: size, fontSize };
     }
 }
