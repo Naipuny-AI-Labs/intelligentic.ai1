@@ -290,6 +290,7 @@ export default function FlowListMenu({ chatflow, isAgentCanvas, setError, update
     return (
         <div>
             <Button
+                color='info'
                 id='demo-customized-button'
                 aria-controls={open ? 'demo-customized-menu' : undefined}
                 aria-haspopup='true'

@@ -81,7 +81,7 @@ export const FlowListTable = ({ data, images, isLoading, filterFunction, updateF
 
     return (
         <>
-            <TableContainer sx={{ border: 1, borderColor: theme.palette.grey[900] + 25, borderRadius: 2 }} component={Paper}>
+            <TableContainer sx={{ border: 1, borderColor: theme.palette.grey[900] + 25, borderRadius: 2 }} elevation={2} component={Paper}>
                 <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
                     <TableHead
                         sx={{
@@ -218,7 +218,7 @@ export const FlowListTable = ({ data, images, isLoading, filterFunction, updateF
                                                                     borderRadius: '50%',
                                                                     backgroundColor: customization.isDarkMode
                                                                         ? theme.palette.common.white
-                                                                        : theme.palette.grey[300] + 75
+                                                                        : 'transparent'
                                                                 }}
                                                             >
                                                                 <img
@@ -226,7 +226,9 @@ export const FlowListTable = ({ data, images, isLoading, filterFunction, updateF
                                                                         width: '100%',
                                                                         height: '100%',
                                                                         padding: 5,
-                                                                        objectFit: 'contain'
+                                                                        objectFit: 'contain',
+                                                                        border: '1px solid black',
+                                                                        borderRadius: '30px'
                                                                     }}
                                                                     alt=''
                                                                     src={img}
