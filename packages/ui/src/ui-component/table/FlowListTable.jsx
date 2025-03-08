@@ -85,7 +85,7 @@ export const FlowListTable = ({ data, images, isLoading, filterFunction, updateF
                 <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
                     <TableHead
                         sx={{
-                            backgroundColor: customization.isDarkMode ? theme.palette.common.black : theme.palette.grey[100],
+                            backgroundColor: customization.isDarkMode ? theme.palette.common.black : theme.palette.success.light,
                             height: 56
                         }}
                     >

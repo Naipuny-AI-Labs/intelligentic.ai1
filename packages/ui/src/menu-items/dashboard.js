@@ -31,7 +31,7 @@ const dashboard = {
         },
         {
             id: 'agentflows',
-            title: 'AI Agents',
+            title: 'Multi Agent',
             type: 'item',
             url: '/agentflows',
             icon: icons.IconUsersGroup,
@@ -40,7 +40,7 @@ const dashboard = {
         },
         {
             id: 'assistants',
-            title: 'Assistants',
+            title: 'Quickers',
             type: 'item',
             url: '/assistants',
             icon: icons.IconRobot,
@@ -64,7 +64,7 @@ const dashboard = {
         },
         {
             id: 'credentials',
-            title: 'Credentials',
+            title: 'Vault',
             type: 'item',
             url: '/credentials',
             icon: icons.IconLock,
@@ -80,7 +80,7 @@ const dashboard = {
         },
         {
             id: 'apikey',
-            title: 'API Keys',
+            title: 'Integrations',
             type: 'item',
             url: '/apikey',
             icon: icons.IconKey,

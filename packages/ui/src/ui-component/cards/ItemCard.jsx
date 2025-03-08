@@ -34,7 +34,7 @@ const ItemCard = ({ data, images, onClick }) => {
     const customization = useSelector((state) => state.customization)
 
     return (
-        <CardWrapper content={false} onClick={onClick} sx={{ border: 1, borderColor: theme.palette.grey[900] + 25, borderRadius: 2 }}>
+        <CardWrapper content={false} onClick={onClick} sx={{ border: 1, borderColor: 'black', borderRadius: 2 }}>
             <Box sx={{ height: '100%', p: 2.25 }}>
                 <Grid container justifyContent='space-between' direction='column' sx={{ height: '100%', gap: 3 }}>
                     <Box display='flex' flexDirection='column' sx={{ width: '100%' }}>
@@ -59,7 +59,8 @@ const ItemCard = ({ data, images, onClick }) => {
                                         backgroundImage: `url(${data.iconSrc})`,
                                         backgroundSize: 'contain',
                                         backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center center'
+                                        backgroundPosition: 'center center',
+                                        border: '30px solid black'
                                     }}
                                 ></div>
                             )}
@@ -84,7 +85,8 @@ const ItemCard = ({ data, images, onClick }) => {
                                     WebkitLineClamp: 2,
                                     WebkitBoxOrient: 'vertical',
                                     textOverflow: 'ellipsis',
-                                    overflow: 'hidden'
+                                    overflow: 'hidden',
+                                    color: customization.isDarkMode ? theme.palette.common.white : theme.palette.common.black
                                 }}
                             >
                                 {data.templateName || data.name}
@@ -122,9 +124,8 @@ const ItemCard = ({ data, images, onClick }) => {
                                         width: 30,
                                         height: 30,
                                         borderRadius: '50%',
-                                        backgroundColor: customization.isDarkMode
-                                            ? theme.palette.common.white
-                                            : theme.palette.grey[300] + 75
+                                        border: '1px solid black',
+                                        backgroundColor: customization.isDarkMode ? theme.palette.common.white : 'transparent'
                                     }}
                                 >
                                     <img style={{ width: '100%', height: '100%', padding: 5, objectFit: 'contain' }} alt='' src={img} />
