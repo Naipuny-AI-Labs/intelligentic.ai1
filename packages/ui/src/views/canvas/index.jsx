@@ -263,6 +263,44 @@ const Canvas = () => {
         event.dataTransfer.dropEffect = 'move'
     }, [])
 
+    const onClick = (node) => {
+        const nodeData = node
+
+        const position = reactFlowInstance.project({
+            x: Math.random() * 400,
+            y: Math.random() * 400
+        })
+
+        const newNodeId = getUniqueNodeId(nodeData, reactFlowInstance.getNodes())
+
+        const newNode = {
+            id: newNodeId,
+            position,
+            type: nodeData.type !== 'StickyNote' ? 'customNode' : 'stickyNote',
+            data: initNode(nodeData, newNodeId)
+        }
+
+        setSelectedNode(newNode)
+        setNodes((nds) =>
+            nds.concat(newNode).map((node) => {
+                if (node.id === newNode.id) {
+                    node.data = {
+                        ...node.data,
+                        selected: true
+                    }
+                } else {
+                    node.data = {
+                        ...node.data,
+                        selected: false
+                    }
+                }
+
+                return node
+            })
+        )
+        setTimeout(() => setDirty(), 0)
+    }
+
     const onDrop = useCallback(
         (event) => {
             event.preventDefault()
@@ -273,7 +311,6 @@ const Canvas = () => {
             if (typeof nodeData === 'undefined' || !nodeData) {
                 return
             }
-
             nodeData = JSON.parse(nodeData)
 
             const position = reactFlowInstance.project({
@@ -516,81 +553,87 @@ const Canvas = () => {
     return (
         <>
             <Box>
-                <AppBar
-                    enableColorOnDark
-                    position='fixed'
-                    color='inherit'
-                    elevation={1}
-                    sx={{
-                        bgcolor: theme.palette.background.default
-                    }}
-                >
-                    <Toolbar>
-                        <CanvasHeader
-                            chatflow={chatflow}
-                            handleSaveFlow={handleSaveFlow}
-                            handleDeleteFlow={handleDeleteFlow}
-                            handleLoadFlow={handleLoadFlow}
-                            isAgentCanvas={isAgentCanvas}
-                        />
-                    </Toolbar>
-                </AppBar>
-                <Box sx={{ pt: '70px', height: '100vh', width: '100%' }}>
-                    <div className='reactflow-parent-wrapper'>
-                        <div className='reactflow-wrapper' ref={reactFlowWrapper}>
-                            <ReactFlow
-                                nodes={nodes}
-                                edges={edges}
-                                onNodesChange={onNodesChange}
-                                onNodeClick={onNodeClick}
-                                onEdgesChange={onEdgesChange}
-                                onDrop={onDrop}
-                                onDragOver={onDragOver}
-                                onNodeDragStop={setDirty}
-                                nodeTypes={nodeTypes}
-                                edgeTypes={edgeTypes}
-                                onConnect={onConnect}
-                                onInit={setReactFlowInstance}
-                                fitView
-                                deleteKeyCode={canvas.canvasDialogShow ? null : ['Delete']}
-                                minZoom={0.1}
-                                className='chatflow-canvas'
-                            >
-                                <Controls
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        left: '50%',
-                                        transform: 'translate(-50%, -50%)'
-                                    }}
-                                />
-                                <Background color='#aaa' gap={16} />
-                                <AddNodes isAgentCanvas={isAgentCanvas} nodesData={getNodesApi.data} node={selectedNode} />
-                                {isSyncNodesButtonEnabled && (
-                                    <Fab
-                                        sx={{
-                                            left: 40,
-                                            top: 20,
-                                            color: 'white',
-                                            background: 'orange',
-                                            '&:hover': {
-                                                background: 'orange',
-                                                backgroundImage: `linear-gradient(rgb(0 0 0/10%) 0 0)`
-                                            }
+                <Box>
+                    <AppBar
+                        enableColorOnDark
+                        position='fixed'
+                        color='inherit'
+                        elevation={1}
+                        sx={{
+                            bgcolor: theme.palette.background.default
+                        }}
+                    >
+                        <Toolbar>
+                            <CanvasHeader
+                                chatflow={chatflow}
+                                handleSaveFlow={handleSaveFlow}
+                                handleDeleteFlow={handleDeleteFlow}
+                                handleLoadFlow={handleLoadFlow}
+                                isAgentCanvas={isAgentCanvas}
+                            />
+                        </Toolbar>
+                    </AppBar>
+                </Box>
+                <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ width: '350px', paddingTop: '28px' }}>
+                        <AddNodes isAgentCanvas={isAgentCanvas} nodesData={getNodesApi.data} node={selectedNode} handleClick={onClick} />
+                    </Box>
+                    <Box sx={{ pt: '70px', height: '100vh', width: '75%' }}>
+                        <div className='reactflow-parent-wrapper'>
+                            <div className='reactflow-wrapper' ref={reactFlowWrapper}>
+                                <ReactFlow
+                                    nodes={nodes}
+                                    edges={edges}
+                                    onNodesChange={onNodesChange}
+                                    onNodeClick={onNodeClick}
+                                    onEdgesChange={onEdgesChange}
+                                    onDrop={onDrop}
+                                    onDragOver={onDragOver}
+                                    onNodeDragStop={setDirty}
+                                    nodeTypes={nodeTypes}
+                                    edgeTypes={edgeTypes}
+                                    onConnect={onConnect}
+                                    onInit={setReactFlowInstance}
+                                    fitView
+                                    deleteKeyCode={canvas.canvasDialogShow ? null : ['Delete']}
+                                    minZoom={0.1}
+                                    className='chatflow-canvas'
+                                >
+                                    <Controls
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%)'
                                         }}
-                                        size='small'
-                                        aria-label='sync'
-                                        title='Sync Nodes'
-                                        onClick={() => syncNodes()}
-                                    >
-                                        <IconRefreshAlert />
-                                    </Fab>
-                                )}
-                                {isUpsertButtonEnabled && <VectorStorePopUp chatflowid={chatflowId} />}
-                                <ChatPopUp isAgentCanvas={isAgentCanvas} chatflowid={chatflowId} />
-                            </ReactFlow>
+                                    />
+                                    <Background color='#aaa' gap={16} />
+                                    {isSyncNodesButtonEnabled && (
+                                        <Fab
+                                            sx={{
+                                                left: 40,
+                                                top: 20,
+                                                color: 'white',
+                                                background: 'orange',
+                                                '&:hover': {
+                                                    background: 'orange',
+                                                    backgroundImage: `linear-gradient(rgb(0 0 0/10%) 0 0)`
+                                                }
+                                            }}
+                                            size='small'
+                                            aria-label='sync'
+                                            title='Sync Nodes'
+                                            onClick={() => syncNodes()}
+                                        >
+                                            <IconRefreshAlert />
+                                        </Fab>
+                                    )}
+                                    {isUpsertButtonEnabled && <VectorStorePopUp chatflowid={chatflowId} />}
+                                    <ChatPopUp isAgentCanvas={isAgentCanvas} chatflowid={chatflowId} />
+                                </ReactFlow>
+                            </div>
                         </div>
-                    </div>
+                    </Box>
                 </Box>
                 <ConfirmDialog />
             </Box>
