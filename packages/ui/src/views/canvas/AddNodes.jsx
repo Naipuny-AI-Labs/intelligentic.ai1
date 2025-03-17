@@ -76,7 +76,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
     const [open, setOpen] = useState(false)
     const [categoryExpanded, setCategoryExpanded] = useState({})
     const [tabValue, setTabValue] = useState(0)
-    const [hover, setHover] = useState(false)
+    const [hoveredNode, setHoveredNode] = useState(null)
 
     const anchorRef = useRef(null)
     const prevOpen = useRef(open)
@@ -422,7 +422,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                         alignItems: 'center'
                                                     }}
                                                 >
-                                                    <Typography fontSize='0.875rem' variant='h5'>
+                                                    <Typography sx={{ fontSize: '0.875rem' }} variant='h5'>
                                                         {category.split(';')[0]}
                                                     </Typography>
                                                     &nbsp;
@@ -442,7 +442,9 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                     />
                                                 </div>
                                             ) : (
-                                                <Typography variant='h5'>{category}</Typography>
+                                                <Typography sx={{ fontSize: '0.875rem' }} variant='h5'>
+                                                    {category}
+                                                </Typography>
                                             )}
                                         </AccordionSummary>
                                         <AccordionDetails>
@@ -452,8 +454,8 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                     key={node.name}
                                                     onDragStart={(event) => onDragStart(event, node)}
                                                     draggable
-                                                    onMouseEnter={() => setHover(true)}
-                                                    onMouseLeave={() => setHover(false)}
+                                                    onMouseEnter={() => setHoveredNode(index)}
+                                                    onMouseLeave={() => setHoveredNode(null)}
                                                 >
                                                     <ListItemButton
                                                         sx={{
@@ -492,7 +494,8 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                             style={{
                                                                                 display: 'flex',
                                                                                 flexDirection: 'row',
-                                                                                alignItems: 'center'
+                                                                                alignItems: 'center',
+                                                                                fontSize: '0.875rem'
                                                                             }}
                                                                         >
                                                                             <span>{node.label}</span>
@@ -529,10 +532,10 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                         )}
                                                                     </>
                                                                 }
-                                                                secondary={node.description}
+                                                                secondary={<div style={{ fontSize: '0.75rem' }}>{node.description}</div>}
                                                             />
                                                         </ListItem>
-                                                        {hover && (
+                                                        {hoveredNode === index && (
                                                             <IconButton
                                                                 onClick={() => onNodeClick(node)}
                                                                 sx={{
