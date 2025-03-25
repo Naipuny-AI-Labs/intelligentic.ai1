@@ -1,7 +1,7 @@
 {
-    "name": "flowise-components",
+    "name": "intelligenticai-components",
     "version": "2.2.6",
-    "description": "Flowiseai Components",
+    "description": "Intelligenticai Components",
     "main": "dist/src/index",
     "types": "dist/src/index.d.ts",
     "scripts": {
@@ -13,10 +13,10 @@
         "nuke": "rimraf dist node_modules .turbo"
     },
     "keywords": [],
-    "homepage": "https://flowiseai.com",
+    "homepage": "https://intelligentic.ai/",
     "author": {
-        "name": "Henry Heng",
-        "email": "henryheng@flowiseai.com"
+        "name": "Vinay Reddy",
+        "email": "vinayreddy@cognitbotz.com"
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "dependencies": {

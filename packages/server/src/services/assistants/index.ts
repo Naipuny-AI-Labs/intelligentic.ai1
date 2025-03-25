@@ -12,7 +12,7 @@ import { FLOWISE_METRIC_COUNTERS, FLOWISE_COUNTER_STATUS } from '../../Interface
 import { AssistantType } from '../../Interface'
 import nodesService from '../nodes'
 import { DocumentStore } from '../../database/entities/DocumentStore'
-import { ICommonObject } from 'flowise-components'
+import { ICommonObject } from 'intelligenticai-components'
 import logger from '../../utils/logger'
 import { ASSISTANT_PROMPT_GENERATOR } from '../../utils/prompt'
 import { INPUT_PARAMS_TYPE } from '../../utils/constants'
@@ -447,7 +447,7 @@ const generateAssistantInstruction = async (task: string, selectedChatModel: ICo
             const nodeModule = await import(nodeInstanceFilePath)
             const newNodeInstance = new nodeModule.nodeClass()
             const nodeData = {
-                credential: selectedChatModel.credential || selectedChatModel.inputs['FLOWISE_CREDENTIAL_ID'] || undefined,
+                credential: selectedChatModel.credential || selectedChatModel.inputs['INTELLIGENTICAI_CREDENTIAL_ID'] || undefined,
                 inputs: selectedChatModel.inputs,
                 id: `${selectedChatModel.name}_0`
             }

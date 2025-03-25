@@ -592,10 +592,10 @@ importers:
             express-rate-limit:
                 specifier: ^6.9.0
                 version: 6.11.2(express@4.18.3)
-            flowise-components:
+            intelligenticai-components:
                 specifier: workspace:^
                 version: link:../components
-            flowise-ui:
+            intelligenticai-ui:
                 specifier: workspace:^
                 version: link:../ui
             global-agent:

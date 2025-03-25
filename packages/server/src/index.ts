@@ -240,6 +240,11 @@ export class App {
         }
 
         this.app.use('/api/v1', flowiseApiV1Router)
+        // Manually set the correct MIME type for JS files
+        this.app.get('/web.js', (req, res) => {
+            res.setHeader('Content-Type', 'application/javascript')
+            res.sendFile(path.join(__dirname, 'public', 'web.js'))
+        })
 
         // ----------------------------------------
         // Configure number of proxies in Host Environment
@@ -259,9 +264,11 @@ export class App {
         // Serve UI static
         // ----------------------------------------
 
-        const packagePath = getNodeModulesPackagePath('flowise-ui')
+        const packagePath = getNodeModulesPackagePath('intelligenticai-ui')
         const uiBuildPath = path.join(packagePath, 'build')
         const uiHtmlPath = path.join(packagePath, 'build', 'index.html')
+        // Serve static files from the "public" directory
+        this.app.use(express.static(path.join(__dirname, 'public')))
 
         this.app.use('/', express.static(uiBuildPath))
 

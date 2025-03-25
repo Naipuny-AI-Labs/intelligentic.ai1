@@ -342,7 +342,7 @@ export interface MemoryMethods {
     clearChatMessages(overrideSessionId?: string): Promise<void>
 }
 
-export abstract class FlowiseMemory extends BufferMemory implements MemoryMethods {
+export abstract class IntelligenticMemory extends BufferMemory implements MemoryMethods {
     abstract getChatMessages(
         overrideSessionId?: string,
         returnBaseMessages?: boolean,

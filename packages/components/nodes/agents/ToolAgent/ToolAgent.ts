@@ -15,7 +15,7 @@ import {
     transformBracesWithColon
 } from '../../../src/utils'
 import {
-    FlowiseMemory,
+    IntelligenticMemory,
     ICommonObject,
     INode,
     INodeData,
@@ -111,7 +111,7 @@ class ToolAgent_Agents implements INode {
     }
 
     async run(nodeData: INodeData, input: string, options: ICommonObject): Promise<string | ICommonObject> {
-        const memory = nodeData.inputs?.memory as FlowiseMemory
+        const memory = nodeData.inputs?.memory as IntelligenticMemory
         const moderations = nodeData.inputs?.inputModeration as Moderation[]
 
         const shouldStreamResponse = options.shouldStreamResponse
@@ -241,7 +241,7 @@ const prepareAgent = async (
 ) => {
     const model = nodeData.inputs?.model as BaseChatModel
     const maxIterations = nodeData.inputs?.maxIterations as string
-    const memory = nodeData.inputs?.memory as FlowiseMemory
+    const memory = nodeData.inputs?.memory as IntelligenticMemory
     let systemMessage = nodeData.inputs?.systemMessage as string
     let tools = nodeData.inputs?.tools
     tools = flatten(tools)

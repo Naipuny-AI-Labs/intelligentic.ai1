@@ -13,7 +13,7 @@ import {
     removeFilesFromStorage,
     removeSpecificFileFromStorage,
     removeSpecificFileFromUpload
-} from 'flowise-components'
+} from 'intelligenticai-components'
 import {
     addLoaderSource,
     ChatType,
@@ -509,7 +509,7 @@ const _splitIntoChunks = async (appDataSource: DataSource, componentNodes: IComp
         const nodeModule = await import(nodeInstanceFilePath)
         // doc loader configs
         const nodeData = {
-            credential: data.credential || data.loaderConfig['FLOWISE_CREDENTIAL_ID'] || undefined,
+            credential: data.credential || data.loaderConfig['INTELLIGENTICAI_CREDENTIAL_ID'] || undefined,
             inputs: { ...data.loaderConfig, textSplitter: splitterInstance },
             outputs: { output: 'document' }
         }
@@ -1853,7 +1853,7 @@ const generateDocStoreToolDesc = async (docStoreId: string, selectedChatModel: I
             const nodeModule = await import(nodeInstanceFilePath)
             const newNodeInstance = new nodeModule.nodeClass()
             const nodeData = {
-                credential: selectedChatModel.credential || selectedChatModel.inputs['FLOWISE_CREDENTIAL_ID'] || undefined,
+                credential: selectedChatModel.credential || selectedChatModel.inputs['INTELLIGENTICAI_CREDENTIAL_ID'] || undefined,
                 inputs: selectedChatModel.inputs,
                 id: `${selectedChatModel.name}_0`
             }

@@ -1,17 +1,17 @@
 <!-- markdownlint-disable MD030 -->
 
-# Flowise UI
+# Inteligentic UI
 
 English | [中文](./README-ZH.md)
 
-React frontend ui for Flowise.
+React frontend ui for Intelligentic AI.
 
 ![Flowise](https://github.com/FlowiseAI/Flowise/blob/main/images/flowise.gif?raw=true)
 
 Install:
 
 ```bash
-npm i flowise-ui
+npm i intelligenticai-ui
 ```
 
 ## License

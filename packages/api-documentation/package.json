@@ -1,7 +1,7 @@
 {
-    "name": "flowise-api",
+    "name": "intelligenticai-api",
     "version": "1.0.2",
-    "description": "Flowise API documentation server",
+    "description": "Intelligentic AI API documentation server",
     "scripts": {
         "build": "tsc",
         "start": "node dist/index.js",

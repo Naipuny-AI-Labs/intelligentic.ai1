@@ -19,7 +19,16 @@ import {
     getCredentialParam,
     mapChatMessageToBaseMessage
 } from '../../../src/utils'
-import { FlowiseMemory, ICommonObject, IMessage, INode, INodeData, INodeParams, MemoryMethods, MessageType } from '../../../src/Interface'
+import {
+    IntelligenticMemory,
+    ICommonObject,
+    IMessage,
+    INode,
+    INodeData,
+    INodeParams,
+    MemoryMethods,
+    MessageType
+} from '../../../src/Interface'
 
 class DynamoDb_Memory implements INode {
     label: string
@@ -159,7 +168,7 @@ interface DynamoDBSerializedChatMessage {
     }
 }
 
-class BufferMemoryExtended extends FlowiseMemory implements MemoryMethods {
+class BufferMemoryExtended extends IntelligenticMemory implements MemoryMethods {
     private tableName = ''
     private partitionKey = ''
     private dynamoKey: Record<string, AttributeValue>

@@ -15,7 +15,7 @@ import {
     mapExtToInputField,
     getFileFromUpload,
     removeSpecificFileFromUpload
-} from 'flowise-components'
+} from 'intelligenticai-components'
 import { StatusCodes } from 'http-status-codes'
 import {
     IncomingInput,

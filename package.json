@@ -1,11 +1,11 @@
 {
-    "name": "flowise",
+    "name": "intelligenticai",
     "version": "2.2.6-hotfix.1",
     "private": true,
-    "homepage": "https://flowiseai.com",
+    "homepage": "https://intelligentic.ai",
     "workspaces": [
         "packages/*",
-        "flowise",
+        "intelligenticai",
         "ui",
         "components",
         "api-documentation"

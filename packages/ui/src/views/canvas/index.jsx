@@ -52,7 +52,7 @@ import useNotifier from '@/utils/useNotifier'
 import { usePrompt } from '@/utils/usePrompt'
 
 // const
-import { FLOWISE_CREDENTIAL_ID } from '@/store/constant'
+import { INTELLIGENTICAI_CREDENTIAL_ID } from '@/store/constant'
 
 const nodeTypes = { customNode: CanvasNode, stickyNote: StickyNote }
 const edgeTypes = { buttonedge: ButtonEdge }
@@ -202,9 +202,9 @@ const Canvas = () => {
         if (reactFlowInstance) {
             const nodes = reactFlowInstance.getNodes().map((node) => {
                 const nodeData = cloneDeep(node.data)
-                if (Object.prototype.hasOwnProperty.call(nodeData.inputs, FLOWISE_CREDENTIAL_ID)) {
-                    nodeData.credential = nodeData.inputs[FLOWISE_CREDENTIAL_ID]
-                    nodeData.inputs = omit(nodeData.inputs, [FLOWISE_CREDENTIAL_ID])
+                if (Object.prototype.hasOwnProperty.call(nodeData.inputs, INTELLIGENTICAI_CREDENTIAL_ID)) {
+                    nodeData.credential = nodeData.inputs[INTELLIGENTICAI_CREDENTIAL_ID]
+                    nodeData.inputs = omit(nodeData.inputs, [INTELLIGENTICAI_CREDENTIAL_ID])
                 }
                 node.data = {
                     ...nodeData,

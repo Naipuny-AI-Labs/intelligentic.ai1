@@ -277,7 +277,6 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nodesData, dispatch])
-
     return (
         <>
             <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>

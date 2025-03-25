@@ -11,7 +11,7 @@ Flowise 的 React 前端界面。
 安装：
 
 ```bash
-npm i flowise-ui
+npm i intelligenticai-ui
 ```
 
 ## 许可证

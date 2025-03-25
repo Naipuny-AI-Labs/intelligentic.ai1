@@ -1,7 +1,7 @@
 import { flatten } from 'lodash'
 import { MessageContentTextDetail, ChatMessage, AnthropicAgent, Anthropic } from 'llamaindex'
 import { getBaseClasses } from '../../../../src/utils'
-import { FlowiseMemory, ICommonObject, IMessage, INode, INodeData, INodeParams, IUsedTool } from '../../../../src/Interface'
+import { IntelligenticMemory, ICommonObject, IMessage, INode, INodeData, INodeParams, IUsedTool } from '../../../../src/Interface'
 
 class AnthropicAgent_LlamaIndex_Agents implements INode {
     label: string
@@ -60,7 +60,7 @@ class AnthropicAgent_LlamaIndex_Agents implements INode {
     }
 
     async run(nodeData: INodeData, input: string, options: ICommonObject): Promise<string | ICommonObject> {
-        const memory = nodeData.inputs?.memory as FlowiseMemory
+        const memory = nodeData.inputs?.memory as IntelligenticMemory
         const model = nodeData.inputs?.model as Anthropic
         const systemMessage = nodeData.inputs?.systemMessage as string
         const prependMessages = options?.prependMessages

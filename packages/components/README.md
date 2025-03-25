@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD030 -->
 
-# Flowise Components
+# Intelligentic AI Components
 
 English | [中文](./README-ZH.md)
 
@@ -11,7 +11,7 @@ Apps integration for Flowise. Contain Nodes and Credentials.
 Install:
 
 ```bash
-npm i flowise-components
+npm i intelligenticai-components
 ```
 
 ## License

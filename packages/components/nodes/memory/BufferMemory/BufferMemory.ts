@@ -1,5 +1,5 @@
 import {
-    FlowiseMemory,
+    IntelligenticMemory,
     IDatabaseEntity,
     ICommonObject,
     IMessage,
@@ -80,7 +80,7 @@ interface BufferMemoryExtendedInput {
     chatflowid: string
 }
 
-class BufferMemoryExtended extends FlowiseMemory implements MemoryMethods {
+class BufferMemoryExtended extends IntelligenticMemory implements MemoryMethods {
     appDataSource: DataSource
     databaseEntities: IDatabaseEntity
     chatflowid: string

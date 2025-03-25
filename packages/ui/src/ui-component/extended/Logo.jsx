@@ -1,5 +1,3 @@
-// import logo from '@/assets/images/flowise_logo.png'
-// import logoDark from '@/assets/images/flowise_logo_dark.png'
 import logo from '@/assets/images/intelligenticai_logo.png'
 import logoDark from '@/assets/images/intelligentic_logo_dark.png'
 
@@ -15,7 +13,7 @@ const Logo = () => {
             <img
                 style={{ objectFit: 'contain', height: 'auto', width: 150 }}
                 src={customization.isDarkMode ? logoDark : logo}
-                alt='Flowise'
+                alt='Intelligentic AI'
             />
         </div>
     )

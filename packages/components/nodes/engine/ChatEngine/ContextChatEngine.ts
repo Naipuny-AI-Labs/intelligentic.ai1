@@ -1,5 +1,5 @@
 import {
-    FlowiseMemory,
+    IntelligenticMemory,
     ICommonObject,
     IMessage,
     INode,
@@ -78,7 +78,7 @@ class ContextChatEngine_LlamaIndex implements INode {
         const model = nodeData.inputs?.model as LLM
         const vectorStoreRetriever = nodeData.inputs?.vectorStoreRetriever as BaseRetriever
         const systemMessagePrompt = nodeData.inputs?.systemMessagePrompt as string
-        const memory = nodeData.inputs?.memory as FlowiseMemory
+        const memory = nodeData.inputs?.memory as IntelligenticMemory
         const returnSourceDocuments = nodeData.inputs?.returnSourceDocuments as boolean
         const prependMessages = options?.prependMessages
 
