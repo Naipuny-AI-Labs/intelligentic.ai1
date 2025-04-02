@@ -1,0 +1,20 @@
+.sidebar {
+    width: 350px;
+    //background-color: #333;
+    //color: white;
+    //padding: 15px;
+    transition: transform 0.3s ease;
+    position: relative; /* Make it position relative to contain the toggle button */
+}
+
+.sidebar.hide {
+    transform: translateX(-100%); /* Slide the sidebar off the screen */
+    width: 0;
+}
+
+.sidebar.show {
+    transform: translateX(0); /* Sidebar slides in */
+}
+.togglebtn-hide {
+    left: 0;
+}

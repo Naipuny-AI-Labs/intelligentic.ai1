@@ -67,6 +67,7 @@ const blacklistForChatflowCanvas = {
 }
 
 const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
+    console.log('####', nodesData)
     const theme = useTheme()
     // const customization = useSelector((state) => state.customization)
     const dispatch = useDispatch()
@@ -281,46 +282,48 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
         <>
             <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                 <Box sx={{ p: 2 }}>
-                    <OutlinedInput
-                        // eslint-disable-next-line
-                        autoFocus
-                        sx={{ width: '100%', pr: 2, pl: 2, my: 2 }}
-                        id='input-search-node'
-                        value={searchValue}
-                        onChange={(e) => filterSearch(e.target.value)}
-                        placeholder='Search nodes'
-                        startAdornment={
-                            <InputAdornment position='start'>
-                                <IconSearch stroke={1.5} size='1rem' color={theme.palette.grey[500]} />
-                            </InputAdornment>
-                        }
-                        endAdornment={
-                            <InputAdornment
-                                position='end'
-                                sx={{
-                                    cursor: 'pointer',
-                                    color: theme.palette.grey[500],
-                                    '&:hover': {
-                                        color: theme.palette.grey[900]
-                                    }
-                                }}
-                                title='Clear Search'
-                            >
-                                <IconX
-                                    stroke={1.5}
-                                    size='1rem'
-                                    onClick={() => filterSearch('')}
-                                    style={{
-                                        cursor: 'pointer'
+                    <Box sx={{ display: 'flex' }}>
+                        <OutlinedInput
+                            // eslint-disable-next-line
+                            autoFocus
+                            sx={{ width: '100%', pr: 2, pl: 2, my: 2 }}
+                            id='input-search-node'
+                            value={searchValue}
+                            onChange={(e) => filterSearch(e.target.value)}
+                            placeholder='Search nodes'
+                            startAdornment={
+                                <InputAdornment position='start'>
+                                    <IconSearch stroke={1.5} size='1rem' color={theme.palette.grey[500]} />
+                                </InputAdornment>
+                            }
+                            endAdornment={
+                                <InputAdornment
+                                    position='end'
+                                    sx={{
+                                        cursor: 'pointer',
+                                        color: theme.palette.grey[500],
+                                        '&:hover': {
+                                            color: theme.palette.grey[900]
+                                        }
                                     }}
-                                />
-                            </InputAdornment>
-                        }
-                        aria-describedby='search-helper-text'
-                        inputProps={{
-                            'aria-label': 'weight'
-                        }}
-                    />
+                                    title='Clear Search'
+                                >
+                                    <IconX
+                                        stroke={1.5}
+                                        size='1rem'
+                                        onClick={() => filterSearch('')}
+                                        style={{
+                                            cursor: 'pointer'
+                                        }}
+                                    />
+                                </InputAdornment>
+                            }
+                            aria-describedby='search-helper-text'
+                            inputProps={{
+                                'aria-label': 'weight'
+                            }}
+                        />
+                    </Box>
                     {!isAgentCanvas && (
                         <Tabs
                             sx={{
@@ -452,7 +455,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                 <div
                                                     key={node.name}
                                                     onDragStart={(event) => onDragStart(event, node)}
-                                                    draggable
+                                                    draggable={!node.ispremium}
                                                     onMouseEnter={() => setHoveredNode(index)}
                                                     onMouseLeave={() => setHoveredNode(null)}
                                                 >
@@ -460,7 +463,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                         sx={{
                                                             p: 0,
                                                             //borderRadius: `${customization.borderRadius}px`,
-                                                            cursor: 'move'
+                                                            cursor: !node.ispremium ? 'move' : 'default'
                                                         }}
                                                     >
                                                         <ListItem alignItems='center'>
@@ -534,7 +537,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                 secondary={<div style={{ fontSize: '0.75rem' }}>{node.description}</div>}
                                                             />
                                                         </ListItem>
-                                                        {hoveredNode === index && (
+                                                        {hoveredNode === index && !node.ispremium && (
                                                             <IconButton
                                                                 onClick={() => onNodeClick(node)}
                                                                 sx={{

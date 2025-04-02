@@ -7,6 +7,7 @@ import { databaseEntities } from '../../utils'
 import logger from '../../utils/logger'
 import { InternalFlowiseError } from '../../errors/internalFlowiseError'
 import { getErrorMessage } from '../../errors/utils'
+import { Nodes } from '../../database/entities/Nodes'
 
 // Get all component nodes
 const getAllNodes = async () => {
@@ -17,6 +18,20 @@ const getAllNodes = async () => {
             const clonedNode = cloneDeep(appServer.nodesPool.componentNodes[nodeName])
             dbResponse.push(clonedNode)
         }
+        return dbResponse
+    } catch (error) {
+        throw new InternalFlowiseError(StatusCodes.INTERNAL_SERVER_ERROR, `Error: nodesService.getAllNodes - ${getErrorMessage(error)}`)
+    }
+}
+
+const getAllNodesByAccessType = async (accessType: string) => {
+    try {
+        const appServer = getRunningExpressApp()
+        const dbResponse: any = await appServer.AppDataSource.getRepository(Nodes).find({
+            where: {
+                accesstype: accessType
+            }
+        })
         return dbResponse
     } catch (error) {
         throw new InternalFlowiseError(StatusCodes.INTERNAL_SERVER_ERROR, `Error: nodesService.getAllNodes - ${getErrorMessage(error)}`)
@@ -167,5 +182,6 @@ export default {
     getSingleNodeIcon,
     getSingleNodeAsyncOptions,
     executeCustomFunction,
-    getAllNodesForCategory
+    getAllNodesForCategory,
+    getAllNodesByAccessType
 }

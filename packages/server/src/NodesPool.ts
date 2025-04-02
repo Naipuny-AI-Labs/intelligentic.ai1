@@ -67,8 +67,10 @@ export class NodesPool {
                             if (!isCommunityNodesAllowed && isAuthorPresent) conditionTwo = false
 
                             const isDisabled = disabled_nodes.includes(newNodeInstance.name)
+                            newNodeInstance['ispremium'] = isDisabled
+                            //logger.info(newNodeInstance)
 
-                            if (conditionOne && conditionTwo && !isDisabled) {
+                            if (conditionOne && conditionTwo) {
                                 this.componentNodes[newNodeInstance.name] = newNodeInstance
                             }
                         }

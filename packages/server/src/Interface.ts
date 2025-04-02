@@ -352,5 +352,13 @@ export interface IVariableOverride {
     enabled: boolean
 }
 
+export interface INodes {
+    id: string
+    accesstype: string
+    nodeData: string
+    updatedDate: Date
+    createdDate: Date
+}
+
 // DocumentStore related
 export * from './Interface.DocumentStore'

@@ -13,6 +13,21 @@ const getAllNodes = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const getAllNodesByAccessType = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (typeof req.params === 'undefined' || !req.params.accesstype) {
+            throw new InternalFlowiseError(
+                StatusCodes.PRECONDITION_FAILED,
+                `Error: nodesController.getNodeByAccessType - accesstype not provided!`
+            )
+        }
+        const apiResponse = await nodesService.getAllNodesByAccessType(req.params.accesstype)
+        return res.json(apiResponse)
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getNodeByName = async (req: Request, res: Response, next: NextFunction) => {
     try {
         if (typeof req.params === 'undefined' || !req.params.name) {
@@ -95,5 +110,6 @@ export default {
     getSingleNodeIcon,
     getSingleNodeAsyncOptions,
     executeCustomFunction,
-    getNodesByCategory
+    getNodesByCategory,
+    getAllNodesByAccessType
 }

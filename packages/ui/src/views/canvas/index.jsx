@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback, useContext } from 'react'
 import ReactFlow, { addEdge, Controls, Background, useNodesState, useEdgesState } from 'reactflow'
 import 'reactflow/dist/style.css'
+import '../../assets/scss/sidenav.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -14,7 +15,7 @@ import {
 import { omit, cloneDeep } from 'lodash'
 
 // material-ui
-import { Toolbar, Box, AppBar, Button, Fab } from '@mui/material'
+import { Toolbar, Box, AppBar, Button, Fab, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 // project imports
@@ -38,6 +39,8 @@ import useConfirm from '@/hooks/useConfirm'
 
 // icons
 import { IconX, IconRefreshAlert } from '@tabler/icons-react'
+import KeyboardArrowLeftTwoTone from '@mui/icons-material/KeyboardArrowLeftTwoTone'
+import KeyboardArrowRightTwoTone from '@mui/icons-material/KeyboardArrowRightTwoTone'
 
 // utils
 import {
@@ -103,6 +106,8 @@ const Canvas = () => {
     const createNewChatflowApi = useApi(chatflowsApi.createNewChatflow)
     const updateChatflowApi = useApi(chatflowsApi.updateChatflow)
     const getSpecificChatflowApi = useApi(chatflowsApi.getSpecificChatflow)
+    const getNodesByAccessTypeApi = useApi(nodesApi.getAllNodesByAccessType)
+    const [open, setOpen] = useState(true)
 
     // ==============================|| Events & Actions ||============================== //
 
@@ -508,7 +513,8 @@ const Canvas = () => {
             })
         }
 
-        getNodesApi.request()
+        //getNodesApi.request()
+        getNodesByAccessTypeApi.request('trail')
 
         // Clear dirty state before leaving and remove any ongoing test triggers and webhooks
         return () => {
@@ -549,6 +555,9 @@ const Canvas = () => {
     }, [templateFlowData])
 
     usePrompt('You have unsaved changes! Do you want to navigate away?', canvasDataStore.isDirty)
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen)
+    }
 
     return (
         <>
@@ -574,11 +583,51 @@ const Canvas = () => {
                         </Toolbar>
                     </AppBar>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ width: '350px', paddingTop: '28px' }}>
-                        <AddNodes isAgentCanvas={isAgentCanvas} nodesData={getNodesApi.data} node={selectedNode} handleClick={onClick} />
+                <Box sx={{ display: 'flex', width: '100%' }}>
+                    {/* <Box sx={{ display: 'flex' }}> */}
+                    <Box sx={{ paddingTop: '28px' }} className={`sidebar ${open ? 'show' : 'hide'}`}>
+                        <AddNodes
+                            isAgentCanvas={isAgentCanvas}
+                            nodesData={
+                                getNodesByAccessTypeApi.data && getNodesByAccessTypeApi.data.length
+                                    ? getNodesByAccessTypeApi.data[0].nodeData
+                                    : null
+                            }
+                            node={selectedNode}
+                            handleClick={onClick}
+                        />
                     </Box>
-                    <Box sx={{ pt: '70px', height: '100vh', width: '75%' }}>
+                    <IconButton
+                        onClick={() => handleToggle()}
+                        sx={{
+                            position: 'absolute',
+                            top: 69,
+                            left: 346,
+                            zIndex: 999,
+                            display: 'inline-flex',
+                            alignItems: 'flex-start',
+                            height: '40px',
+                            transition: 'left .3s ease',
+                            borderRadius: '0',
+                            border: '1px solid #ccc',
+                            marginLeft: '4px',
+                            backgroundColor: 'gray',
+                            '&:hover': {
+                                backgroundColor: 'lightgray'
+                            }
+                        }}
+                        size='small'
+                        className={`togglebtn-${open ? 'show' : 'hide'}`}
+                    >
+                        {open ? (
+                            <KeyboardArrowLeftTwoTone sx={{ fontSize: 32, color: 'black' }} />
+                        ) : (
+                            <KeyboardArrowRightTwoTone sx={{ fontSize: 32, color: 'black' }} />
+                        )}
+                    </IconButton>
+                    {/* </Box> */}
+
+                    <Box sx={{ pt: '70px', height: '100vh', width: '100%' }}>
                         <div className='reactflow-parent-wrapper'>
                             <div className='reactflow-wrapper' ref={reactFlowWrapper}>
                                 <ReactFlow
@@ -603,7 +652,7 @@ const Canvas = () => {
                                         style={{
                                             display: 'flex',
                                             flexDirection: 'row',
-                                            left: '50%',
+                                            left: '5%',
                                             transform: 'translate(-50%, -50%)'
                                         }}
                                     />
