@@ -26,8 +26,8 @@ export const theme = (customization) => {
               darkTextPrimary: color.paper,
               darkTextSecondary: color.paper,
               textDark: color.paper,
-              menuSelected: color.darkSecondaryDark,
-              menuSelectedBack: color.darkSecondaryLight,
+              menuSelected: color.darkGreenDark,
+              menuSelectedBack: color.darkGreenLight,
               divider: color.darkPaper,
               customization
           }
@@ -36,12 +36,12 @@ export const theme = (customization) => {
               heading: color.grey900,
               paper: color.paper,
               backgroundDefault: color.paper,
-              background: color.primaryLight,
+              background: color.blueLight,
               darkTextPrimary: color.grey700,
               darkTextSecondary: color.grey500,
               textDark: color.grey900,
-              menuSelected: color.secondaryDark,
-              menuSelectedBack: color.secondaryLight,
+              menuSelected: color.greenDark,
+              menuSelectedBack: color.greenLight,
               divider: color.grey200,
               customization
           }

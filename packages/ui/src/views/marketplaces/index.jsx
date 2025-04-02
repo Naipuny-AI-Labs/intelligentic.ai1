@@ -20,8 +20,7 @@ import {
     ToggleButtonGroup,
     MenuItem,
     Button,
-    Tabs,
-    Tab
+    Chip
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { IconLayoutGrid, IconList, IconX } from '@tabler/icons-react'
@@ -520,7 +519,7 @@ const Marketplace = () => {
                             onSearchChange={onSearchChange}
                             search={true}
                             searchPlaceholder='Search Name/Description/Node'
-                            title='Marketplace'
+                            title='Agent store'
                         >
                             <ToggleButtonGroup
                                 sx={{ borderRadius: 2, height: '100%' }}
@@ -555,31 +554,39 @@ const Marketplace = () => {
                                 </ToggleButton>
                             </ToggleButtonGroup>
                         </ViewHeader>
-                        <Tabs value={activeTabValue} onChange={handleTabChange} textColor='primary' aria-label='tabs' centered>
+                        {/* <Tabs value={activeTabValue} onChange={handleTabChange} textColor='primary' aria-label='tabs' centered>
                             <Tab value={0} label='Community Templates'></Tab>
                             <Tab value={1} label='My Templates' />
-                        </Tabs>
+                        </Tabs> */}
                         <TabPanel value={activeTabValue} index={0}>
-                            <Stack direction='row' sx={{ gap: 2, my: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+                            <Stack direction='row' sx={{ gap: 1, my: 2, alignItems: 'center', flexWrap: 'wrap' }}>
                                 {usecases.map((usecase, index) => (
-                                    <FormControlLabel
+                                    <Chip
                                         key={index}
-                                        size='small'
-                                        control={
-                                            <Checkbox
-                                                disabled={eligibleUsecases.length === 0 ? true : !eligibleUsecases.includes(usecase)}
-                                                color='success'
-                                                checked={selectedUsecases.includes(usecase)}
-                                                onChange={(event) => {
-                                                    setSelectedUsecases(
-                                                        event.target.checked
-                                                            ? [...selectedUsecases, usecase]
-                                                            : selectedUsecases.filter((item) => item !== usecase)
-                                                    )
-                                                }}
-                                            />
-                                        }
                                         label={usecase}
+                                        variant={selectedUsecases.includes(usecase) ? 'filled' : 'outlined'}
+                                        color={selectedUsecases.includes(usecase) ? 'primary' : 'default'}
+                                        disabled={eligibleUsecases.length === 0 ? true : !eligibleUsecases.includes(usecase)}
+                                        onClick={() => {
+                                            setSelectedUsecases(
+                                                selectedUsecases.includes(usecase)
+                                                    ? selectedUsecases.filter((item) => item !== usecase)
+                                                    : [...selectedUsecases, usecase]
+                                            )
+                                        }}
+                                        sx={{
+                                            borderRadius: 1,
+                                            py: 1,
+                                            transition: 'all 0.2s ease',
+                                            '&:hover': {
+                                                transform: 'translateY(-1px)',
+                                                boxShadow: 1
+                                            },
+                                            '&.MuiChip-filled': {
+                                                fontWeight: 600
+                                            }
+                                        }}
+                                        clickable
                                     />
                                 ))}
                             </Stack>

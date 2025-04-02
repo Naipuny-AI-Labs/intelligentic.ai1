@@ -18,10 +18,11 @@ export class AddNodesEntityInsert1743471664812 implements MigrationInterface {
             const clonedNode = cloneDeep(this.componentNodes[nodeName])
             dbResponse.push(clonedNode)
         }
+        const jsonString = JSON.stringify(dbResponse).replace(/'/g, "''")
         await queryRunner.query(
             `INSERT INTO nodes(
 	accesstype, "nodeData", "createdDate", "updatedDate")
-	VALUES ('trail', '${JSON.stringify(dbResponse)}',now(), now());`
+	VALUES ('trail', '${jsonString}',now(), now());`
         )
     }
 

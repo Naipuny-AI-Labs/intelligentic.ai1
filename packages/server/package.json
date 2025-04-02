@@ -1,5 +1,5 @@
 {
-    "name": "intelligenticai",
+    "name": "server-intelligenticai",
     "version": "2.2.6-hotfix.1",
     "description": "Intelligenticai Server",
     "main": "dist/index",
