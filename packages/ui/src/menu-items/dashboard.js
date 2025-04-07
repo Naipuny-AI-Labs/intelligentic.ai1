@@ -26,24 +26,24 @@ const dashboard = {
             title: 'AI Chatbots',
             type: 'item',
             url: '/chatflows',
-            icon: icons.IconHierarchy,
+            icon: icons.IconRobot,
             breadcrumbs: true
         },
         {
             id: 'agentflows',
-            title: 'Multi Agent',
+            title: 'AI Agents',
             type: 'item',
             url: '/agentflows',
-            icon: icons.IconUsersGroup,
+            icon: icons.IconHierarchy,
             breadcrumbs: true,
             isBeta: false
         },
         {
             id: 'assistants',
-            title: 'Quickers',
+            title: 'Assistants',
             type: 'item',
             url: '/assistants',
-            icon: icons.IconRobot,
+            icon: icons.IconUsersGroup,
             breadcrumbs: true
         },
         {

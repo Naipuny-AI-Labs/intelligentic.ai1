@@ -463,7 +463,8 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                         sx={{
                                                             p: 0,
                                                             //borderRadius: `${customization.borderRadius}px`,
-                                                            cursor: !node.ispremium ? 'move' : 'default'
+                                                            cursor: !node.ispremium ? 'move' : 'default',
+                                                            position: 'relative'
                                                         }}
                                                     >
                                                         <ListItem alignItems='center'>
@@ -489,7 +490,10 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                 </div>
                                                             </ListItemAvatar>
                                                             <ListItemText
-                                                                sx={{ ml: 1 }}
+                                                                sx={{
+                                                                    ml: 1,
+                                                                    pr: 4 // Add right padding to prevent overlap
+                                                                }}
                                                                 primary={
                                                                     <>
                                                                         <div
@@ -497,11 +501,36 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                                 display: 'flex',
                                                                                 flexDirection: 'row',
                                                                                 alignItems: 'center',
-                                                                                fontSize: '0.875rem'
+                                                                                fontSize: '0.875rem',
+                                                                                gap: 4 // Use gap instead of &nbsp; for better spacing
                                                                             }}
                                                                         >
                                                                             <span>{node.label}</span>
-                                                                            &nbsp;
+                                                                            {node.ispremium ? (
+                                                                                <Chip
+                                                                                    sx={{
+                                                                                        width: 'max-content',
+                                                                                        fontWeight: 700,
+                                                                                        fontSize: '0.65rem',
+                                                                                        background: theme.palette.primary.main,
+                                                                                        color: 'white'
+                                                                                    }}
+                                                                                    size='small'
+                                                                                    label='PREMIUM'
+                                                                                />
+                                                                            ) : (
+                                                                                <Chip
+                                                                                    sx={{
+                                                                                        width: 'max-content',
+                                                                                        fontWeight: 700,
+                                                                                        fontSize: '0.65rem',
+                                                                                        background: theme.palette.secondary.main,
+                                                                                        color: 'white'
+                                                                                    }}
+                                                                                    size='small'
+                                                                                    label='TRAIL'
+                                                                                />
+                                                                            )}
                                                                             {node.badge && (
                                                                                 <Chip
                                                                                     sx={{

@@ -35,34 +35,61 @@ const ViewHeader = ({
     useSearchShortcut(searchInputRef)
 
     return (
-        <Box sx={{ flexGrow: 1, py: 1.25, width: '100%' }}>
+        <Box
+            sx={{
+                flexGrow: 1,
+                py: 1,
+                width: '100%',
+                maxWidth: '100vw',
+                overflow: 'hidden'
+            }}
+        >
             <Toolbar
-                disableGutters={true}
+                disableGutters
                 sx={{
-                    p: 0,
+                    px: 0,
+                    py: 0.5,
                     display: 'flex',
                     justifyContent: 'space-between',
-                    width: '100%'
+                    alignItems: 'center',
+                    width: '100%',
+                    gap: 2
                 }}
             >
-                <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 2,
+                        flex: 1,
+                        minWidth: 0
+                    }}
+                >
                     {isBackButton && (
-                        <StyledFab sx={{ mr: 3 }} size='small' color='secondary' aria-label='back' title='Back' onClick={onBack}>
+                        <StyledFab size='small' color='secondary' aria-label='back' title='Back' onClick={onBack} sx={{ mr: 1 }}>
                             <IconArrowLeft />
                         </StyledFab>
                     )}
-                    <Box sx={{ display: 'flex', alignItems: 'start', flexDirection: 'column' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 0.5,
+                            minWidth: 0,
+                            flex: 1
+                        }}
+                    >
                         <Typography
                             sx={{
-                                fontSize: '2rem',
+                                fontSize: { xs: '1.5rem', sm: '2rem' },
                                 fontWeight: 600,
+                                lineHeight: 1.2,
                                 display: '-webkit-box',
-                                WebkitLineClamp: 3,
+                                WebkitLineClamp: 2,
                                 WebkitBoxOrient: 'vertical',
                                 textOverflow: 'ellipsis',
                                 overflow: 'hidden',
-                                flex: 1,
-                                maxWidth: 'calc(100vh - 100px)'
+                                maxWidth: '100%'
                             }}
                             variant='h1'
                         >
@@ -71,16 +98,15 @@ const ViewHeader = ({
                         {description && (
                             <Typography
                                 sx={{
-                                    fontSize: '1rem',
+                                    fontSize: '0.875rem',
                                     fontWeight: 500,
-                                    mt: 2,
+                                    color: 'text.secondary',
                                     display: '-webkit-box',
-                                    WebkitLineClamp: 5,
+                                    WebkitLineClamp: 2,
                                     WebkitBoxOrient: 'vertical',
                                     textOverflow: 'ellipsis',
                                     overflow: 'hidden',
-                                    flex: 1,
-                                    maxWidth: 'calc(100vh - 100px)'
+                                    maxWidth: '100%'
                                 }}
                             >
                                 {description}
@@ -88,22 +114,28 @@ const ViewHeader = ({
                         )}
                     </Box>
                     {isEditButton && (
-                        <IconButton sx={{ ml: 3 }} color='secondary' title='Edit' onClick={onEdit}>
+                        <IconButton color='secondary' title='Edit' onClick={onEdit} sx={{ ml: 'auto' }}>
                             <IconEdit />
                         </IconButton>
                     )}
                 </Box>
-                <Box sx={{ height: 40, display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        flexShrink: 0
+                    }}
+                >
                     {search && (
                         <OutlinedInput
                             inputRef={searchInputRef}
                             size='small'
                             sx={{
-                                width: '325px',
-                                height: '100%',
+                                width: { xs: '200px', sm: '300px' },
+                                height: 40,
                                 display: { xs: 'none', sm: 'flex' },
                                 borderRadius: 2,
-
                                 '& .MuiOutlinedInput-notchedOutline': {
                                     borderRadius: 2
                                 }

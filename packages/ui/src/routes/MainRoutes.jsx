@@ -3,6 +3,7 @@ import { lazy } from 'react'
 // project imports
 import MainLayout from '@/layout/MainLayout'
 import Loadable from '@/ui-component/loading/Loadable'
+import Settings from '@/views/settings'
 
 // chatflows routing
 const Chatflows = Loadable(lazy(() => import('@/views/chatflows')))
@@ -92,6 +93,10 @@ const MainRoutes = {
         {
             path: '/variables',
             element: <Variables />
+        },
+        {
+            path: '/settings',
+            element: <Settings />
         },
         {
             path: '/document-stores',
