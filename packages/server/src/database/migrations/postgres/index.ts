@@ -30,6 +30,7 @@ import { AddFollowUpPrompts1726666309552 } from './1726666309552-AddFollowUpProm
 import { AddTypeToAssistant1733011290987 } from './1733011290987-AddTypeToAssistant'
 import { AddNodesEntity1743471664812 } from './1743471664812-NodesEntity'
 import { AddNodesEntityInsert1743471664812 } from './1743471664812-NodesEntity-Insert'
+import { OnBoardUserEntity1699325775451 } from './1699325775451-OnBoardUserEntity'
 
 export const postgresMigrations = [
     Init1693891895163,
@@ -63,5 +64,6 @@ export const postgresMigrations = [
     AddFollowUpPrompts1726666309552,
     AddTypeToAssistant1733011290987,
     AddNodesEntity1743471664812,
-    AddNodesEntityInsert1743471664812
+    AddNodesEntityInsert1743471664812,
+    OnBoardUserEntity1699325775451
 ]

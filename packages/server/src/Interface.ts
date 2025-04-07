@@ -52,6 +52,23 @@ export interface IChatFlow {
     type?: ChatflowType
 }
 
+export interface IOnBoardUser {
+    id: string
+    usecase: string
+    industry: string
+    companysize: string
+    companyname: string
+    name: string
+    email: string
+    designation: string
+    phone: string
+    requirements: string
+    updatedDate: Date
+    createdDate: Date
+    dataprivacy?: boolean
+    marketingconsent?: boolean
+}
+
 export interface IChatMessage {
     id: string
     role: MessageType
