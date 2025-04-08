@@ -377,17 +377,18 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                     }}
                     style={{
                         height: '100%',
-                        maxHeight: `calc(100vh - ${isAgentCanvas ? '300' : '240'}px)`,
-                        overflowX: 'hidden'
+                        overflowX: 'hidden',
+                        overflowY: 'auto',
+                        paddingBottom: 0
                     }}
                 >
-                    <Box sx={{ p: 2, pt: 0 }}>
+                    <Box sx={{ p: 2, pt: 0, pb: 0 }}>
                         <List
                             sx={{
                                 width: '100%',
                                 maxWidth: 370,
+                                overflow: 'auto',
                                 py: 0,
-                                //borderRadius: '10px',
                                 [theme.breakpoints.down('md')]: {
                                     maxWidth: 370
                                 },
@@ -449,9 +450,8 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                 </Typography>
                                             )}
                                         </AccordionSummary>
-                                        <AccordionDetails>
+                                        <AccordionDetails sx={{ p: 0 }}>
                                             {nodes[category].map((node, index) => (
-                                                // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                                                 <div
                                                     key={node.name}
                                                     onDragStart={(event) => onDragStart(event, node)}
@@ -462,7 +462,6 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                     <ListItemButton
                                                         sx={{
                                                             p: 0,
-                                                            //borderRadius: `${customization.borderRadius}px`,
                                                             cursor: !node.ispremium ? 'move' : 'default',
                                                             position: 'relative'
                                                         }}
@@ -492,7 +491,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                             <ListItemText
                                                                 sx={{
                                                                     ml: 1,
-                                                                    pr: 4 // Add right padding to prevent overlap
+                                                                    pr: 4
                                                                 }}
                                                                 primary={
                                                                     <>
@@ -502,7 +501,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, handleClick }) => {
                                                                                 flexDirection: 'row',
                                                                                 alignItems: 'center',
                                                                                 fontSize: '0.875rem',
-                                                                                gap: 4 // Use gap instead of &nbsp; for better spacing
+                                                                                gap: 4
                                                                             }}
                                                                         >
                                                                             <span>{node.label}</span>

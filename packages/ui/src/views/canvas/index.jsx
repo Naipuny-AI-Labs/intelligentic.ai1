@@ -15,7 +15,7 @@ import {
 import { omit, cloneDeep } from 'lodash'
 
 // material-ui
-import { Toolbar, Box, AppBar, Button, Fab, IconButton } from '@mui/material'
+import { Toolbar, Box, AppBar, Button, Fab } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 // project imports
@@ -597,25 +597,17 @@ const Canvas = () => {
                             handleClick={onClick}
                         />
                     </Box>
-                    <IconButton
+                    <Fab
                         onClick={() => handleToggle()}
                         sx={{
                             position: 'absolute',
-                            top: 69,
-                            left: 346,
+                            top: 79,
+                            left: 446,
                             zIndex: 999,
-                            display: 'inline-flex',
-                            alignItems: 'flex-start',
-                            height: '40px',
                             transition: 'left .3s ease',
-                            borderRadius: '0',
-                            border: '1px solid #ccc',
-                            marginLeft: '4px',
-                            backgroundColor: 'gray',
-                            '&:hover': {
-                                backgroundColor: 'lightgray'
-                            }
+                            bgcolor: 'whitesmoke'
                         }}
+                        color='primary'
                         size='small'
                         className={`togglebtn-${open ? 'show' : 'hide'}`}
                     >
@@ -624,7 +616,7 @@ const Canvas = () => {
                         ) : (
                             <KeyboardArrowRightTwoTone sx={{ fontSize: 32, color: 'black' }} />
                         )}
-                    </IconButton>
+                    </Fab>
                     {/* </Box> */}
 
                     <Box sx={{ pt: '70px', height: '100vh', width: '100%' }}>

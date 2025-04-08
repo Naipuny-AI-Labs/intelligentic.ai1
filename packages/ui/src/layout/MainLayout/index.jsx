@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 // material-ui
-import { styled, useTheme } from '@mui/material/styles'
-import { AppBar, Box, Container, CssBaseline, Tab, Tabs, Toolbar, useMediaQuery } from '@mui/material'
+import { styled, useTheme, alpha } from '@mui/material/styles'
+import { AppBar, Box, Chip, Container, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 import config from '@/config'
 // project imports
 import Header from './Header'
@@ -13,7 +13,8 @@ import { SET_MENU } from '@/store/actions'
 import menuItem from '@/menu-items'
 // styles
 const Main = styled('main')(({ theme }) => ({
-    ...theme.typography.mainContent
+    ...theme.typography.mainContent,
+    backgroundColor: alpha(theme.palette.background.default, 0.8)
 }))
 
 // ==============================|| MAIN LAYOUT ||============================== //
@@ -59,7 +60,7 @@ const MainLayout = () => {
                 color='inherit'
                 elevation={0}
                 sx={{
-                    bgcolor: theme.palette.background.default,
+                    bgcolor: alpha(theme.palette.background.default, 0.8),
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}
             >
@@ -74,47 +75,53 @@ const MainLayout = () => {
             {/* main content */}
             <Main theme={theme}>
                 <Container>
-                    <Box sx={{ width: '100%', overflowX: 'auto' }}>
-                        <Tabs
-                            value={tabValue}
-                            onChange={handleTabChange}
-                            textColor='inherit'
-                            indicatorColor='secondary'
-                            variant='scrollable'
-                            scrollButtons='auto'
-                            sx={{
-                                '& .MuiTabs-indicator': {
-                                    height: 2,
-                                    borderRadius: '2px 2px 0 0'
-                                },
-                                '& .MuiTab-root': {
-                                    minWidth: 60,
-                                    fontSize: '0.75rem',
-                                    fontWeight: 500,
-                                    textTransform: 'none',
-                                    letterSpacing: '0.025em',
-                                    padding: '8px 12px',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        color: theme.palette.secondary.main,
-                                        backgroundColor: theme.palette.action.hover
-                                    },
-                                    '&.Mui-selected': {
-                                        color: theme.palette.secondary.main,
-                                        fontWeight: 600
-                                    }
-                                }
-                            }}
-                        >
-                            {menuItem.items[0].children.map((item) => (
-                                <Tab
+                    <Box sx={{ width: '100%', overflowX: 'auto', py: 2 }}>
+                        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', p: 1 }}>
+                            {menuItem.items[0].children.map((item, index) => (
+                                <Chip
                                     key={item.id}
                                     label={item.title}
                                     icon={item.icon && <item.icon stroke={1.5} size='1rem' />}
-                                    iconPosition='start'
+                                    onClick={(e) => handleTabChange(e, index)}
+                                    variant={tabValue === index ? 'filled' : 'outlined'}
+                                    sx={{
+                                        borderRadius: 2,
+                                        borderColor:
+                                            tabValue === index
+                                                ? theme.palette.mode === 'dark'
+                                                    ? theme.palette.common.white
+                                                    : theme.palette.primary.main
+                                                : 'divider',
+                                        backgroundColor:
+                                            tabValue === index
+                                                ? theme.palette.mode === 'dark'
+                                                    ? theme.palette.common.white
+                                                    : theme.palette.primary.main
+                                                : theme.palette.success,
+                                        color:
+                                            tabValue === index
+                                                ? theme.palette.common.white
+                                                : theme.palette.mode === 'dark'
+                                                ? theme.palette.common.white
+                                                : theme.palette.primary.main,
+                                        '&:hover': {
+                                            backgroundColor:
+                                                theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.main,
+                                            borderColor:
+                                                theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.primary.main
+                                        },
+                                        '& .MuiChip-icon': {
+                                            color:
+                                                tabValue === index
+                                                    ? theme.palette.common.white
+                                                    : theme.palette.mode === 'dark'
+                                                    ? theme.palette.common.white
+                                                    : theme.palette.primary.main
+                                        }
+                                    }}
                                 />
                             ))}
-                        </Tabs>
+                        </Box>
                     </Box>
                     <Outlet />
                 </Container>

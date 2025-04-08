@@ -565,7 +565,7 @@ const Marketplace = () => {
                                         key={index}
                                         label={usecase}
                                         variant={selectedUsecases.includes(usecase) ? 'filled' : 'outlined'}
-                                        color={selectedUsecases.includes(usecase) ? 'primary' : 'default'}
+                                        color={selectedUsecases.includes(usecase) ? 'secondary' : 'default'}
                                         disabled={eligibleUsecases.length === 0 ? true : !eligibleUsecases.includes(usecase)}
                                         onClick={() => {
                                             setSelectedUsecases(
@@ -575,7 +575,7 @@ const Marketplace = () => {
                                             )
                                         }}
                                         sx={{
-                                            borderRadius: 1,
+                                            borderRadius: 20,
                                             py: 1,
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
@@ -583,7 +583,9 @@ const Marketplace = () => {
                                                 boxShadow: 1
                                             },
                                             '&.MuiChip-filled': {
-                                                fontWeight: 600
+                                                fontWeight: 600,
+                                                backgroundColor: (theme) => theme.palette.secondary.main,
+                                                color: (theme) => theme.palette.common.white
                                             }
                                         }}
                                         clickable
