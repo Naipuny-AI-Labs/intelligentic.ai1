@@ -5,7 +5,6 @@ import { getRunningExpressApp } from '../../utils/getRunningExpressApp'
 import { OnBoardUser } from '../../database/entities/OnBoardUser'
 
 const saveOnBoardUser = async (onBoardUser: OnBoardUser): Promise<any> => {
-    console.log('service', onBoardUser)
     try {
         const appServer = getRunningExpressApp()
         let dbResponse: OnBoardUser

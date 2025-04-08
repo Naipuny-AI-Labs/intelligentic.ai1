@@ -69,6 +69,26 @@ export interface IOnBoardUser {
     marketingconsent?: boolean
 }
 
+export interface IUser {
+    id: string
+    usecase: string
+    industry: string
+    companysize: string
+    companyname: string
+    name: string
+    email: string
+    designation: string
+    phone: string
+    requirements: string
+    updatedDate: Date
+    createdDate: Date
+    dataprivacy?: boolean
+    marketingconsent?: boolean
+    username: string
+    password: string
+    apikey: string
+}
+
 export interface IChatMessage {
     id: string
     role: MessageType

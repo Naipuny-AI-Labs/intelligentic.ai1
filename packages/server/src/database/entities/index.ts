@@ -13,6 +13,7 @@ import { ApiKey } from './ApiKey'
 import { CustomTemplate } from './CustomTemplate'
 import { Nodes } from './Nodes'
 import { OnBoardUser } from './OnBoardUser'
+import { User } from './User'
 
 export const entities = {
     ChatFlow,
@@ -29,5 +30,6 @@ export const entities = {
     ApiKey,
     CustomTemplate,
     Nodes,
-    OnBoardUser
+    OnBoardUser,
+    User
 }
