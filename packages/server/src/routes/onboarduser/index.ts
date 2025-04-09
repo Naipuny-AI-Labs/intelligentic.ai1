@@ -4,5 +4,6 @@ const router = express.Router()
 
 // CREATE
 router.post('/', onboarduserController.saveOnBoardUser)
+router.post('/changestatus', onboarduserController.changeOnBoardUserStatus)
 
 export default router
