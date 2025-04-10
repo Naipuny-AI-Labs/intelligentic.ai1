@@ -45,6 +45,7 @@ import versionRouter from './versions'
 import nvidiaNimRouter from './nvidia-nim'
 import onboarduserRouter from './onboarduser'
 import userRouter from './user'
+import agentRouter from './agent'
 
 const router = express.Router()
 
@@ -94,5 +95,6 @@ router.use('/upsert-history', upsertHistoryRouter)
 router.use('/nvidia-nim', nvidiaNimRouter)
 router.use('/onboarduser', onboarduserRouter)
 router.use('/user', userRouter)
+router.use('/agent', agentRouter)
 
 export default router

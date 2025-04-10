@@ -14,6 +14,7 @@ import { CustomTemplate } from './CustomTemplate'
 import { Nodes } from './Nodes'
 import { OnBoardUser } from './OnBoardUser'
 import { User } from './User'
+import { Agent } from './Agent'
 
 export const entities = {
     ChatFlow,
@@ -31,5 +32,6 @@ export const entities = {
     CustomTemplate,
     Nodes,
     OnBoardUser,
-    User
+    User,
+    Agent
 }

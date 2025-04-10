@@ -33,6 +33,7 @@ import { AddNodesEntityInsert1743471664812 } from './1743471664812-NodesEntity-I
 import { OnBoardUserEntity1699325775451 } from './1699325775451-OnBoardUserEntity'
 import { AddStatusToOnboardUser1711538016098 } from './1711538016098-AddStatusToOnboardUser'
 import { UserEntity1699325775451 } from './1699325775451-UserEntity'
+import { AgentEntity1699325775451 } from './1699325775451-AgentEntity'
 
 export const postgresMigrations = [
     Init1693891895163,
@@ -69,5 +70,6 @@ export const postgresMigrations = [
     AddNodesEntityInsert1743471664812,
     OnBoardUserEntity1699325775451,
     AddStatusToOnboardUser1711538016098,
-    UserEntity1699325775451
+    UserEntity1699325775451,
+    AgentEntity1699325775451
 ]
