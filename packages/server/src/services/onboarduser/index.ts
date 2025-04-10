@@ -4,6 +4,19 @@ import { getErrorMessage } from '../../errors/utils'
 import { getRunningExpressApp } from '../../utils/getRunningExpressApp'
 import { OnBoardUser } from '../../database/entities/OnBoardUser'
 
+const getOnBoardUsers = async (): Promise<any> => {
+    try {
+        const appServer = getRunningExpressApp()
+        const dbResponse = await appServer.AppDataSource.getRepository(OnBoardUser).find()
+        return dbResponse
+    } catch (error) {
+        throw new InternalFlowiseError(
+            StatusCodes.INTERNAL_SERVER_ERROR,
+            `Error: onboardUserService.getOnBoardUsers - ${getErrorMessage(error)}`
+        )
+    }
+}
+
 const saveOnBoardUser = async (onBoardUser: OnBoardUser): Promise<any> => {
     try {
         const appServer = getRunningExpressApp()
@@ -40,6 +53,7 @@ const changeOnBoardUserStatus = async (requestBody: any): Promise<any> => {
 }
 
 export default {
+    getOnBoardUsers,
     saveOnBoardUser,
     changeOnBoardUserStatus
 }

@@ -6,4 +6,7 @@ const router = express.Router()
 router.post('/', onboarduserController.saveOnBoardUser)
 router.post('/changestatus', onboarduserController.changeOnBoardUserStatus)
 
+// GET
+router.get('/', onboarduserController.getOnBoardUsers)
+
 export default router
