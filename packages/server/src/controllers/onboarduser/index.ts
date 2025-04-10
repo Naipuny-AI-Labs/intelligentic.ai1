@@ -18,6 +18,23 @@ const saveOnBoardUser = async (req: Request, res: Response, next: NextFunction) 
     }
 }
 
+const changeOnBoardUserStatus = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (!req.body) {
+            throw new InternalFlowiseError(
+                StatusCodes.PRECONDITION_FAILED,
+                `Error: onboardUserRouter.chageOnboardUserStatus - body not provided!`
+            )
+        }
+        const body = req.body
+        const apiResponse = await onboarduserService.changeOnBoardUserStatus({ userId: body.userId, status: body.status })
+        return res.json(apiResponse)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export default {
-    saveOnBoardUser
+    saveOnBoardUser,
+    changeOnBoardUserStatus
 }

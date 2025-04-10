@@ -40,6 +40,9 @@ export class OnBoardUser implements IOnBoardUser {
     @Column({ nullable: true })
     marketingconsent?: boolean
 
+    @Column()
+    status: string
+
     @Column({ type: 'timestamp' })
     @CreateDateColumn()
     createdDate: Date

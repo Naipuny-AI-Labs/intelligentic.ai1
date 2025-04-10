@@ -2,12 +2,20 @@ import { Request, Response, NextFunction } from 'express'
 import userService from '../../services/user'
 import { InternalFlowiseError } from '../../errors/internalFlowiseError'
 import { StatusCodes } from 'http-status-codes'
+import { generateAPIKey } from '../../utils/apiKey'
+import { getEncryptionKey } from '../../utils'
+import { AES } from 'crypto-js'
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         if (!req.body) {
             throw new InternalFlowiseError(StatusCodes.PRECONDITION_FAILED, `Error: userController.createUser - body not provided!`)
         }
+        const encryptKey = await getEncryptionKey()
+
+        const password = AES.encrypt(req.body.password, encryptKey).toString()
+        req.body.password = password
+        req.body.apikey = generateAPIKey()
         const apiResponse = await userService.createUser(req.body)
         return res.json(apiResponse)
     } catch (error) {
