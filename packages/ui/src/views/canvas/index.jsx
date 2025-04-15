@@ -602,7 +602,7 @@ const Canvas = () => {
                         sx={{
                             position: 'absolute',
                             top: 79,
-                            left: 446,
+                            left: 246,
                             zIndex: 999,
                             transition: 'left .3s ease',
                             bgcolor: 'whitesmoke'

@@ -22,7 +22,7 @@ export class MCPToolkit extends BaseToolkit {
         if (this._tools === null) {
             this.client = new Client(
                 {
-                    name: 'flowise-client',
+                    name: 'intelligentic-client',
                     version: '1.0.0'
                 },
                 {
