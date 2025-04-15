@@ -11,6 +11,10 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
         if (!req.body) {
             throw new InternalFlowiseError(StatusCodes.PRECONDITION_FAILED, `Error: userController.createUser - body not provided!`)
         }
+        const emailExists = await userService.checkUserEmail(req.body.email)
+        if (emailExists) {
+            throw new InternalFlowiseError(StatusCodes.BAD_GATEWAY, `Error: userController.createUser - email already exists!`)
+        }
         const encryptKey = await getEncryptionKey()
 
         const password = AES.encrypt(req.body.password, encryptKey).toString()
@@ -71,10 +75,26 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (!req.body) {
+            throw new InternalFlowiseError(
+                StatusCodes.PRECONDITION_FAILED,
+                `Error: userController.loginUser - username and password are not provided!`
+            )
+        }
+        const apiResponse = await userService.validateUser(req.body.email, req.body.password)
+        return res.json(apiResponse)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export default {
     createUser,
     deleteUser,
     getAllUsers,
     getUserById,
-    updateUser
+    updateUser,
+    loginUser
 }
