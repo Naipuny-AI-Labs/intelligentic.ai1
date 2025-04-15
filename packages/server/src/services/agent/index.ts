@@ -67,7 +67,7 @@ const updateAgent = async (agentId: string, requestBody: any): Promise<any> => {
             throw new InternalFlowiseError(StatusCodes.NOT_FOUND, `Agent ${agentId} not found`)
         }
         Object.assign(agent, requestBody)
-        const dbResponse = await appServer.AppDataSource.getRepository(Agent).save(requestBody)
+        const dbResponse = await appServer.AppDataSource.getRepository(Agent).save(agent)
         return dbResponse
     } catch (error) {
         throw new InternalFlowiseError(StatusCodes.INTERNAL_SERVER_ERROR, `Error: agentService.updateAgent - ${getErrorMessage(error)}`)
