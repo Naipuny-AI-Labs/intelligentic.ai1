@@ -98,13 +98,11 @@ export function getDataSource(): DataSource {
 }
 
 const getDatabaseSSLFromEnv = () => {
-    if (process.env.DATABASE_SSL_KEY_BASE64) {
+    if (process.env.DATABASE_SSL === 'true') {
         return {
-            rejectUnauthorized: false,
-            ca: Buffer.from(process.env.DATABASE_SSL_KEY_BASE64, 'base64')
+            rejectUnauthorized: false, // Optional: Allows self-signed certificates
+            sslmode: 'require' // Ensures SSL is used
         }
-    } else if (process.env.DATABASE_SSL === 'true') {
-        return true
     }
     return undefined
 }
